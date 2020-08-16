@@ -4,14 +4,15 @@ import { ThemeProvider } from 'styled-components';
 import routes from '../utils/routes';
 import theme from '../utils/theme';
 import GlobalStyle from '../utils/GlobalStyles';
+import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
 import Homepage from './Homepage';
 import StartPage from './StartPage';
 import CalendardPage from './CalendardPage';
 
-function Root() {
-	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyle />
+const Root = () => (
+	<ThemeProvider theme={theme}>
+		<GlobalStyle />
+		<PhoneFrame>
 			<Router>
 				<Switch>
 					<Route exact path={routes.home}>
@@ -25,8 +26,8 @@ function Root() {
 					</Route>
 				</Switch>
 			</Router>
-		</ThemeProvider>
-	);
-}
+		</PhoneFrame>
+	</ThemeProvider>
+);
 
 export default Root;
