@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { auth } from '../../../firebase';
-import { CURRENT_USER, routes } from '../../../utils/constants';
+import { routes } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
@@ -11,20 +11,6 @@ import FormError from '../../atoms/FormError';
 import { StyledWrapper } from './styles';
 
 const SignUpForm = () => {
-	const history = useHistory();
-
-	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				localStorage.setItem(CURRENT_USER, user.uid);
-				history.push(routes.start);
-			} else {
-				localStorage.removeItem(CURRENT_USER);
-			}
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const handleSubmit = (values) => {
 		auth
 			.createUserWithEmailAndPassword(values.email, values.password)

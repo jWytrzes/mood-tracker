@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
+import { auth } from '../../../firebase';
 import { routes } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
@@ -10,8 +11,10 @@ import FormError from '../../atoms/FormError';
 import { StyledWrapper } from './styles';
 
 const LoginForm = () => {
-	const handleSubmit = () => {
-		console.log('submit');
+	const handleSubmit = (values) => {
+		auth
+			.signInWithEmailAndPassword(values.email, values.password)
+			.catch((error) => alert(error.message));
 	};
 
 	const validate = (values) => {
