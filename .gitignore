@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
+.env
+database.rules.json
 # testing
 /coverage
 
