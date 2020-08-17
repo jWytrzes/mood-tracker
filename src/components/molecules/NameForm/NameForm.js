@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { USER_NAME } from '../../../utils/constants';
-import routes from '../../../utils/routes';
+import { USER_NAME, routes } from '../../../utils/constants';
 import H2 from '../../atoms/H2';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';

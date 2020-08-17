@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-import routes from '../../../utils/routes';
+import { routes } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
