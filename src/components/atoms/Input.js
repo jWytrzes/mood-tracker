@@ -5,9 +5,8 @@ const Input = styled.input`
 	border: none;
 	width: 100%;
 	display: flex;
-	border-radius: 10px;
-	margin: 25px 0;
-	padding: 16px 20px;
+	border-radius: 14px;
+	padding: 15px 20px;
 	font-size: 1.6rem;
 
 	&::placeholder {

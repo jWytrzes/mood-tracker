@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 const Button = styled.button`
 	border: none;
-	background-color: ${({ theme, secondary }) =>
-		secondary ? theme.accentLight : theme.accent};
-	color: ${({ theme, secondary }) => (secondary ? theme.accent : theme.base)};
+	background-color: ${({ theme, secondary, tertiary }) =>
+		secondary ? theme.accentLight : tertiary ? 'transparent' : theme.accent};
+	color: ${({ theme, secondary, tertiary }) =>
+		secondary ? theme.accent : tertiary ? theme.textPrimary : theme.base};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -12,6 +13,7 @@ const Button = styled.button`
 	width: calc(100% - 50px);
 	padding: 16px;
 	margin: auto;
+	text-decoration: none;
 `;
 
 export default Button;
