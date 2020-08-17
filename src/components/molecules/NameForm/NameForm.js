@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { USER_NAME, routes } from '../../../utils/constants';
+import { USER_NAME, routes, CURRENT_USER } from '../../../utils/constants';
 import H2 from '../../atoms/H2';
-import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
+import { StyledInput } from './styles';
+import { db } from '../../../firebase';
 
 const NameForm = () => {
 	const [name, setName] = useState('');
@@ -23,6 +24,10 @@ const NameForm = () => {
 	const handleButtonClick = () => {
 		if (name.length) {
 			localStorage.setItem(USER_NAME, name);
+			const userId = localStorage.getItem(CURRENT_USER);
+			db.ref(`users/${userId}`).set({
+				name,
+			});
 			setRedirect(true);
 		}
 	};
@@ -30,7 +35,7 @@ const NameForm = () => {
 	return (
 		<div>
 			<H2> What's your name? </H2>
-			<Input
+			<StyledInput
 				type="text"
 				placeholder="Type it here"
 				value={name}
