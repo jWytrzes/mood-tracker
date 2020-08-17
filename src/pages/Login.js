@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
-import H1 from '../components/atoms/H1';
-import NameForm from '../components/molecules/NameForm/NameForm';
+import H1 from '../components/atoms/H2';
+import LoginForm from '../components/molecules/LoginForm/LoginForm';
 
 const StyledWrapper = styled.div`
 	display: flex;
@@ -10,17 +10,17 @@ const StyledWrapper = styled.div`
 	margin: auto 0;
 `;
 
-const StartPage = () => {
+const Login = () => {
 	return (
 		<MainTemplate>
 			<StyledWrapper>
 				<H1>
-					<b> Hello! </b>
+					<b>Login</b>
 				</H1>
-				<NameForm />
+				<LoginForm />
 			</StyledWrapper>
 		</MainTemplate>
 	);
 };
 
-export default StartPage;
+export default Login;
