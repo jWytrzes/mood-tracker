@@ -18,6 +18,7 @@ const Login = () => {
 
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
+			console.log(user);
 			if (user) {
 				localStorage.setItem(CURRENT_USER, user.uid);
 				history.push(routes.start);

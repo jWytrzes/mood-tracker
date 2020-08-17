@@ -8,3 +8,8 @@ export const routes = {
 	login: '/login',
 	signup: '/signup',
 };
+
+export const endpoints = {
+	moods: '/moods',
+	users: '/users',
+};

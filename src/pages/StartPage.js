@@ -17,14 +17,14 @@ const StartPage = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				localStorage.setItem(CURRENT_USER, user.uid);
-			} else {
-				localStorage.removeItem(CURRENT_USER);
-				history.push(routes.login);
-			}
-		});
+		const user = auth.currentUser;
+		console.log(user);
+		if (user) {
+			localStorage.setItem(CURRENT_USER, user.uid);
+		} else {
+			localStorage.removeItem(CURRENT_USER);
+			history.push(routes.login);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

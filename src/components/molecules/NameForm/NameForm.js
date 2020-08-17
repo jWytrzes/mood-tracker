@@ -4,15 +4,15 @@ import { USER_NAME, routes, CURRENT_USER } from '../../../utils/constants';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
 import { StyledInput } from './styles';
-import { db } from '../../../firebase';
+import { db, auth } from '../../../firebase';
 
 const NameForm = () => {
 	const [name, setName] = useState('');
 	const [redirect, setRedirect] = useState(false);
 
 	useEffect(() => {
-		const userName = localStorage.getItem(USER_NAME);
-		if (userName) {
+		const user = auth.currentUser;
+		if (user && user.displayName) {
 			setRedirect(true);
 		}
 	}, []);
@@ -23,9 +23,11 @@ const NameForm = () => {
 
 	const handleButtonClick = () => {
 		if (name.length) {
-			localStorage.setItem(USER_NAME, name);
-			const userId = localStorage.getItem(CURRENT_USER);
-			db.ref(`users/${userId}`).set({
+			const currentUser = auth.currentUser;
+			currentUser.updateProfile({
+				displayName: name,
+			});
+			db.ref(`/users/${currentUser.uid}`).set({
 				name,
 			});
 			setRedirect(true);

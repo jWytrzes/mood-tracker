@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { auth } from '../../../firebase';
-import { routes } from '../../../utils/constants';
+import { routes, CURRENT_USER } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
@@ -14,27 +14,15 @@ const LoginForm = () => {
 	const handleSubmit = (values) => {
 		auth
 			.signInWithEmailAndPassword(values.email, values.password)
+			.then(({ user }) => {
+				console.log(user);
+				if (user) {
+					localStorage.setItem(CURRENT_USER, user.uid);
+				} else {
+					localStorage.removeItem(CURRENT_USER);
+				}
+			})
 			.catch((error) => alert(error.message));
-	};
-
-	const validate = (values) => {
-		const errors = {};
-
-		if (!values.email) {
-			errors.email = 'E-mail is required';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
-			errors.email = 'Invalid email address';
-		}
-
-		if (!values.password) {
-			errors.password = 'Password is required';
-		} else if (values.password.length < 8) {
-			errors.password = 'Password must be at least 8 characters';
-		}
-
-		return errors;
 	};
 
 	return (
@@ -45,7 +33,6 @@ const LoginForm = () => {
 					password: '',
 				}}
 				onSubmit={handleSubmit}
-				validate={validate}
 			>
 				{({ errors, touched }) => (
 					<Form>
