@@ -8,6 +8,8 @@ import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
 import Homepage from './Homepage';
 import StartPage from './StartPage';
 import CalendardPage from './CalendardPage';
+import Login from './Login';
+import SignUp from './SignUp';
 
 const Root = () => (
 	<ThemeProvider theme={theme}>
@@ -23,6 +25,12 @@ const Root = () => (
 					</Route>
 					<Route path={routes.calendar}>
 						<CalendardPage />
+					</Route>
+					<Route path={routes.login}>
+						<Login />
+					</Route>
+					<Route path={routes.signup}>
+						<SignUp />
 					</Route>
 				</Switch>
 			</Router>
