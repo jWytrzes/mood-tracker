@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import routes from '../utils/routes';
+import { routes } from '../utils/constants';
 import theme from '../utils/theme';
 import GlobalStyle from '../utils/GlobalStyles';
 import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
