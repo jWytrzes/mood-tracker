@@ -14,10 +14,11 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_APP_ID,
 	measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 export const auth = firebase.auth();
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 export const db = firebase.database();
 export const storage = firebase.storage().ref();

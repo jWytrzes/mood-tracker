@@ -7,7 +7,6 @@ const MoodInput = ({ icon, name, checked }) => {
 	const [link, setLink] = useState('');
 
 	useEffect(() => {
-		console.log('test');
 		storage
 			.child(icon)
 			.getDownloadURL()

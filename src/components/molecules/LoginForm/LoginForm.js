@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { auth } from '../../../firebase';
-import { routes, CURRENT_USER } from '../../../utils/constants';
+import { routes } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
@@ -14,14 +14,6 @@ const LoginForm = () => {
 	const handleSubmit = (values) => {
 		auth
 			.signInWithEmailAndPassword(values.email, values.password)
-			.then(({ user }) => {
-				console.log(user);
-				if (user) {
-					localStorage.setItem(CURRENT_USER, user.uid);
-				} else {
-					localStorage.removeItem(CURRENT_USER);
-				}
-			})
 			.catch((error) => alert(error.message));
 	};
 

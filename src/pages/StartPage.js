@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { auth } from '../firebase';
-import { CURRENT_USER, routes } from '../utils/constants';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../utils/redux';
+import { routes } from '../utils/constants';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
 import H1 from '../components/atoms/H1';
 import NameForm from '../components/molecules/NameForm/NameForm';
@@ -15,18 +16,16 @@ const StyledWrapper = styled.div`
 
 const StartPage = () => {
 	const history = useHistory();
+	const { user } = useSelector(userSelector);
 
 	useEffect(() => {
-		const user = auth.currentUser;
-		console.log(user);
-		if (user) {
-			localStorage.setItem(CURRENT_USER, user.uid);
-		} else {
-			localStorage.removeItem(CURRENT_USER);
+		if (!user) {
 			history.push(routes.login);
+		} else if (user.name.length) {
+			history.push(routes.home);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [user]);
 
 	return (
 		<MainTemplate>

@@ -1,6 +1,3 @@
-export const USER_NAME = 'USER_NAME';
-export const CURRENT_USER = 'CURRENT_USER';
-
 export const routes = {
 	home: '/',
 	start: '/start',
@@ -10,6 +7,6 @@ export const routes = {
 };
 
 export const endpoints = {
-	moods: '/moods',
-	users: '/users',
+	moods: '/moods/',
+	users: '/users/',
 };
