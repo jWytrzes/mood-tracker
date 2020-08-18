@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { USER_NAME, routes, CURRENT_USER } from '../../../utils/constants';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSelector, setUserData } from '../../../utils/redux';
+import { routes, endpoints } from '../../../utils/constants';
+import { db, auth } from '../../../firebase';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
 import { StyledInput } from './styles';
-import { db } from '../../../firebase';
 
 const NameForm = () => {
 	const [name, setName] = useState('');
 	const [redirect, setRedirect] = useState(false);
-
-	useEffect(() => {
-		const userName = localStorage.getItem(USER_NAME);
-		if (userName) {
-			setRedirect(true);
-		}
-	}, []);
+	const dispatch = useDispatch();
+	const { user } = useSelector(userSelector);
 
 	const handleInput = (e) => {
 		setName(e.target.value);
@@ -23,11 +20,14 @@ const NameForm = () => {
 
 	const handleButtonClick = () => {
 		if (name.length) {
-			localStorage.setItem(USER_NAME, name);
-			const userId = localStorage.getItem(CURRENT_USER);
-			db.ref(`users/${userId}`).set({
+			const currentUser = auth.currentUser;
+			currentUser.updateProfile({
+				displayName: name,
+			});
+			db.ref(`${endpoints.users}${currentUser.uid}`).set({
 				name,
 			});
+			dispatch(setUserData({ ...user, name }));
 			setRedirect(true);
 		}
 	};

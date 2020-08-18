@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { routes } from '../utils/constants';
-import theme from '../utils/theme';
+import store, { userSelector } from '../utils/redux';
+import * as themes from '../utils/theme';
 import GlobalStyle from '../utils/GlobalStyles';
 import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
 import Homepage from './Homepage';
@@ -11,8 +13,10 @@ import CalendardPage from './CalendardPage';
 import Login from './Login';
 import SignUp from './SignUp';
 
-const Root = () => (
-	<ThemeProvider theme={theme}>
+const App = () => (
+	<ThemeProvider
+		theme={themes[useSelector(userSelector).theme] || themes.happy}
+	>
 		<GlobalStyle />
 		<PhoneFrame>
 			<Router>
@@ -37,5 +41,13 @@ const Root = () => (
 		</PhoneFrame>
 	</ThemeProvider>
 );
+
+const Root = () => {
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+	);
+};
 
 export default Root;

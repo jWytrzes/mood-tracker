@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { auth, db } from '../../../firebase';
-import { routes } from '../../../utils/constants';
+import { routes, endpoints } from '../../../utils/constants';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
@@ -14,8 +14,8 @@ const SignUpForm = () => {
 	const handleSubmit = (values) => {
 		auth
 			.createUserWithEmailAndPassword(values.email, values.password)
-			.then((response) => {
-				db.ref('users/' + response.user.uid).set({ name: '' });
+			.then(({ user }) => {
+				db.ref(`${endpoints.users}${user.uid}`).set({ name: '' });
 			})
 			.catch((error) => alert(error.message));
 	};

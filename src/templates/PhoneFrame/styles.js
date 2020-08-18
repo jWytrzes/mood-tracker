@@ -8,8 +8,9 @@ export const StyledWrapper = styled.div`
 		margin: auto;
 		border-radius: 44px;
 		border: 10px solid #333;
-		padding: 30px 10px 10px;
+		padding: 0px 10px 10px;
 		position: relative;
+		overflow: hidden;
 
 		&::before {
 			content: '';
