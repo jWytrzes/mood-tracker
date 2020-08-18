@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
+import { Form } from 'formik';
 
 export const StyledWrapper = styled.div`
 	display: flex;
@@ -22,7 +22,7 @@ export const StyledForm = styled(Form)`
 	justify-content: space-between;
 `;
 
-export const StyledTextarea = styled(Field)`
+export const StyledTextarea = styled.textarea`
 	width: 100%;
 	margin: 25px 0 20px;
 	border: none;

@@ -2,6 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	user: null,
+	theme: 'theme',
 };
 
 const userSlice = createSlice({
@@ -11,11 +12,14 @@ const userSlice = createSlice({
 		setUserData: (state, action) => {
 			state.user = action.payload;
 		},
+		changeTheme: (state, action) => {
+			state.theme = action.payload;
+		},
 	},
 });
 
 export const {
-	actions: { setUserData },
+	actions: { setUserData, changeTheme },
 	reducer: userData,
 } = userSlice;
 

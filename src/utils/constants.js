@@ -9,4 +9,5 @@ export const routes = {
 export const endpoints = {
 	moods: '/moods/',
 	users: '/users/',
+	moodData: '/moodData/',
 };
