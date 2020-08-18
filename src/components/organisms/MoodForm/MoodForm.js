@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import { auth, db } from '../../../firebase';
 import { endpoints, routes } from '../../../utils/constants';
+import { getFormattedDate } from '../../../utils';
 import MoodCards from '../../molecules/MoodCards/MoodCards';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
@@ -18,7 +19,7 @@ const MoodForm = () => {
 
 	const handleSubmit = (values) => {
 		const userId = auth.currentUser.uid;
-		const today = new Date().toISOString().slice(0, 10);
+		const today = getFormattedDate();
 		db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${today}`)
 			.set({
 				mood: values.pickedMood.toLowerCase(),

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUserData } from '../../utils/redux';
-import { auth, db } from '../../firebase';
-import { endpoints } from '../../utils/constants';
+import { auth } from '../../firebase';
 import { StyledWrapper, StyledButtonBig, StyledButtonSmall } from './styles';
+import { updateUserDataInStore } from '../../utils';
 
 const PhoneFrame = ({ children }) => {
 	const dispatch = useDispatch();
@@ -11,11 +10,7 @@ const PhoneFrame = ({ children }) => {
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
-				db.ref(`${endpoints.users}${user.uid}`)
-					.once('value')
-					.then((snapshot) => {
-						dispatch(setUserData(snapshot.val()));
-					});
+				updateUserDataInStore(user.uid);
 			}
 		});
 	}, [dispatch]);

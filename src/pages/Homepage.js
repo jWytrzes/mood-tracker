@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { db, auth } from '../firebase';
 import { userSelector } from '../utils/redux';
 import { routes, endpoints } from '../utils/constants';
+import { getFormattedDate, updateUserDataInStore } from '../utils';
 import H1 from '../components/atoms/H1';
 import H2 from '../components/atoms/H2';
 import MoodForm from '../components/organisms/MoodForm/MoodForm';
@@ -35,11 +36,12 @@ const Homepage = () => {
 			history.push(routes.login);
 		} else {
 			const userId = auth.currentUser.uid;
-			const today = new Date().toISOString().slice(0, 10);
+			const today = getFormattedDate();
 			db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${today}`)
 				.once('value')
 				.then((snapshot) => {
 					if (snapshot.val()) {
+						updateUserDataInStore(userId);
 						history.push(routes.calendar);
 					}
 				});
