@@ -1,7 +1,7 @@
 import React from 'react';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 
-const CalendardPage = () => {
+const CalendarPage = () => {
 	return (
 		<div>
 			<CalendarHeader />
@@ -9,4 +9,4 @@ const CalendardPage = () => {
 	);
 };
 
-export default CalendardPage;
+export default CalendarPage;

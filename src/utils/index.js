@@ -20,9 +20,13 @@ export const getFormattedDate = () => {
 };
 
 export const updateUserDataInStore = (userId) => {
-	db.ref(`${endpoints.users}${userId}`)
-		.once('value')
-		.then((snapshot) => {
-			store.dispatch(setUserData(snapshot.val()));
-		});
+	if (userId) {
+		db.ref(`${endpoints.users}${userId}`)
+			.once('value')
+			.then((snapshot) => {
+				store.dispatch(setUserData(snapshot.val()));
+			});
+	} else {
+		store.dispatch(setUserData(null));
+	}
 };

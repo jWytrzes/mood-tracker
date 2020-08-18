@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import { auth, db } from '../../../firebase';
 import { endpoints, routes } from '../../../utils/constants';
-import { getFormattedDate } from '../../../utils';
+import { getFormattedDate, updateUserDataInStore } from '../../../utils';
 import MoodCards from '../../molecules/MoodCards/MoodCards';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
@@ -25,7 +25,8 @@ const MoodForm = () => {
 				mood: values.pickedMood.toLowerCase(),
 				note: values.note,
 			})
-			.then(() => {
+			.then((res) => {
+				updateUserDataInStore(userId);
 				history.push(routes.calendar);
 			});
 	};

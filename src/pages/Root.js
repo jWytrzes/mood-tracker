@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { routes } from '../utils/constants';
 import store, { userSelector } from '../utils/redux';
@@ -9,38 +14,63 @@ import GlobalStyle from '../utils/GlobalStyles';
 import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
 import Homepage from './Homepage';
 import StartPage from './StartPage';
-import CalendardPage from './CalendardPage';
+import CalendarPage from './CalendarPage';
 import Login from './Login';
 import SignUp from './SignUp';
+import { auth } from '../firebase';
+import { updateUserDataInStore } from '../utils';
 
-const App = () => (
-	<ThemeProvider
-		theme={themes[useSelector(userSelector).theme] || themes.happy}
-	>
-		<GlobalStyle />
-		<PhoneFrame>
-			<Router>
-				<Switch>
-					<Route exact path={routes.home}>
-						<Homepage />
-					</Route>
-					<Route path={routes.start}>
-						<StartPage />
-					</Route>
-					<Route path={routes.calendar}>
-						<CalendardPage />
-					</Route>
-					<Route path={routes.login}>
-						<Login />
-					</Route>
-					<Route path={routes.signup}>
-						<SignUp />
-					</Route>
-				</Switch>
-			</Router>
-		</PhoneFrame>
-	</ThemeProvider>
-);
+const PrivateRoute = ({ children, ...props }) => {
+	const authenticated = auth.currentUser;
+
+	return (
+		<Route
+			{...props}
+			render={() => (authenticated ? children : <Redirect to={routes.login} />)}
+		/>
+	);
+};
+
+const App = () => {
+	useEffect(() => {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				updateUserDataInStore(user.uid);
+			} else {
+				updateUserDataInStore(null);
+			}
+		});
+	}, []);
+
+	return (
+		<ThemeProvider
+			theme={themes[useSelector(userSelector).theme] || themes.happy}
+		>
+			<GlobalStyle />
+			<PhoneFrame>
+				<Router>
+					<Switch>
+						<PrivateRoute exact path={routes.home}>
+							<Homepage />
+						</PrivateRoute>
+						<PrivateRoute path={routes.start}>
+							<StartPage />
+						</PrivateRoute>
+						<PrivateRoute path={routes.calendar}>
+							<CalendarPage />
+						</PrivateRoute>
+						<Route path={routes.login}>
+							<Login />
+						</Route>
+						<Route path={routes.signup}>
+							<SignUp />
+						</Route>
+					</Switch>
+				</Router>
+			</PhoneFrame>
+		</ThemeProvider>
+	);
+};
 
 const Root = () => {
 	return (

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { userSelector } from '../../../utils/redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSelector, changeTheme } from '../../../utils/redux';
 import { getFormattedDate } from '../../../utils';
+import { months } from '../../../utils/constants';
 import {
 	StyledWrapper,
 	StyledCalendarCard,
@@ -12,27 +13,36 @@ import {
 
 const CalendarHeader = () => {
 	const { user } = useSelector(userSelector);
+	const [today, setToday] = useState(null);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const today = getFormattedDate();
+		const date = getFormattedDate();
+
 		if (user && user.moodData) {
-			const todaysData = user.moodData[today];
+			const todaysData = user.moodData[date];
 			if (todaysData) {
+				const [d, m, y] = date.split('-');
+				setToday({ ...todaysData, day: d, month: m, year: y });
+				dispatch(changeTheme(todaysData.mood));
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 
 	return (
 		<StyledWrapper>
-			<StyledCalendarCard>
-				<StyledDay> 18 </StyledDay>
-				<span> aug </span>
-			</StyledCalendarCard>
+			{today && (
+				<StyledCalendarCard>
+					<StyledDay> {today.day} </StyledDay>
+					<span> {months[today.month]} </span>
+				</StyledCalendarCard>
+			)}
+
 			<div>
 				<StyledTitle> Your today's note: </StyledTitle>
 				<StyledParagraph>
-					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-					nonumy eirmod tempor invidunt ut.
+					{today && today.note ? today.note : "You didn't leave a note today"}
 				</StyledParagraph>
 			</div>
 		</StyledWrapper>

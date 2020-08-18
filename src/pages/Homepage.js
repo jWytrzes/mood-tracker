@@ -32,9 +32,7 @@ const Homepage = () => {
 	const { user } = useSelector(userSelector);
 
 	useEffect(() => {
-		if (!user) {
-			history.push(routes.login);
-		} else {
+		if (user) {
 			const userId = auth.currentUser.uid;
 			const today = getFormattedDate();
 			db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${today}`)
@@ -47,7 +45,7 @@ const Homepage = () => {
 				});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, []);
 
 	return (
 		<StyledWrapper>

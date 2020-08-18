@@ -1,20 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { auth } from '../../firebase';
+import React from 'react';
 import { StyledWrapper, StyledButtonBig, StyledButtonSmall } from './styles';
-import { updateUserDataInStore } from '../../utils';
 
 const PhoneFrame = ({ children }) => {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				updateUserDataInStore(user.uid);
-			}
-		});
-	}, [dispatch]);
-
 	return (
 		<StyledWrapper>
 			<StyledButtonBig />
