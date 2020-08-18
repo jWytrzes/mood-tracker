@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Form } from 'formik';
 import { db } from '../../../firebase';
 import { endpoints } from '../../../utils/constants';
-import MoodInput from '../../molecules/MoodInput/MoodInput';
+import MoodInput from '../../atoms/MoodInput/MoodInput';
 import { StyledWrapper } from './styles';
 
-const MoodCards = () => {
+const MoodCards = ({ values }) => {
 	const [moods, setMoods] = useState([]);
 
 	useEffect(() => {
@@ -29,24 +28,18 @@ const MoodCards = () => {
 	}, []);
 
 	return (
-		<Formik initialValues={{ pickedMood: '' }}>
-			{({ values }) => (
-				<Form>
-					<StyledWrapper>
-						{moods.map((mood) => {
-							return (
-								<MoodInput
-									name={mood.name}
-									icon={mood.icon}
-									key={mood.id}
-									checked={values.pickedMood === mood.name.toLowerCase()}
-								/>
-							);
-						})}
-					</StyledWrapper>
-				</Form>
-			)}
-		</Formik>
+		<StyledWrapper>
+			{moods.map((mood) => {
+				return (
+					<MoodInput
+						name={mood.name}
+						icon={mood.icon}
+						key={mood.id}
+						checked={values.pickedMood === mood.name.toLowerCase()}
+					/>
+				);
+			})}
+		</StyledWrapper>
 	);
 };
 
