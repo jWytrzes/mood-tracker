@@ -51,11 +51,12 @@ export const StyledMood = styled.div`
 	color: ${({ theme }) => theme.base};
 	background-color: ${({ theme }) => theme.accent};
 	font-weight: ${({ theme }) => theme.font.weight.semiBold};
-	width: fit-content;
-	padding: 2px 45px;
+	width: 120px;
+	padding: 2px 10px;
+	text-align: center;
 	margin-bottom: 10px;
 	position: absolute;
-	top: 18px;
-	right: -42px;
+	top: 17px;
+	right: -34px;
 	transform: rotate(45deg);
 `;

@@ -11,7 +11,6 @@ import {
 	StyledParagraph,
 	StyledMood,
 } from './styles';
-import { auth } from '../../../firebase';
 
 const CalendarHeader = () => {
 	const { user, infoDate } = useSelector(userSelector);
@@ -19,7 +18,6 @@ const CalendarHeader = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		// auth.signOut();
 		const date = infoDate || getFormattedDate();
 
 		if (user && user.moodData) {
