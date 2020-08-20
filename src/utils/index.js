@@ -2,11 +2,10 @@ import { endpoints } from './constants';
 import { db } from '../firebase';
 import store, { setUserData } from './redux';
 
-export const getFormattedDate = () => {
-	const today = new Date();
-	let dd = today.getDate();
-	let mm = today.getMonth() + 1;
-	const yyyy = today.getFullYear();
+export const getFormattedDate = (date = new Date()) => {
+	let dd = date.getDate();
+	let mm = date.getMonth() + 1;
+	const yyyy = date.getFullYear();
 
 	if (dd < 10) {
 		dd = `0${dd}`;
