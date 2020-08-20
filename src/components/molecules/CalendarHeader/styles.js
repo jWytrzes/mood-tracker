@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.header`
+	position: relative;
 	padding: 25px;
 	background-color: ${({ theme }) => theme.accentLight};
 	border-radius: 0 0 25px 25px;
 	display: flex;
 	align-items: center;
+	overflow-x: hidden;
 `;
 
 export const StyledCalendarCard = styled.div`
@@ -39,4 +41,21 @@ export const StyledTitle = styled.div`
 export const StyledParagraph = styled.p`
 	margin-bottom: 0;
 	font-size: 1.2rem;
+	max-height: 51px;
+	overflow-y: auto;
+`;
+
+export const StyledMood = styled.div`
+	font-size: 1rem;
+	text-transform: uppercase;
+	color: ${({ theme }) => theme.base};
+	background-color: ${({ theme }) => theme.accent};
+	font-weight: ${({ theme }) => theme.font.weight.semiBold};
+	width: fit-content;
+	padding: 2px 45px;
+	margin-bottom: 10px;
+	position: absolute;
+	top: 18px;
+	right: -42px;
+	transform: rotate(45deg);
 `;

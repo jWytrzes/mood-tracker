@@ -9,26 +9,29 @@ import {
 	StyledDay,
 	StyledTitle,
 	StyledParagraph,
+	StyledMood,
 } from './styles';
+import { auth } from '../../../firebase';
 
 const CalendarHeader = () => {
-	const { user } = useSelector(userSelector);
+	const { user, infoDate } = useSelector(userSelector);
 	const [today, setToday] = useState(null);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const date = getFormattedDate();
+		// auth.signOut();
+		const date = infoDate || getFormattedDate();
 
 		if (user && user.moodData) {
 			const todaysData = user.moodData[date];
 			if (todaysData) {
 				const [d, m, y] = date.split('-');
 				setToday({ ...todaysData, day: d, month: m, year: y });
-				dispatch(changeTheme(todaysData.mood));
+				dispatch(changeTheme(todaysData.mood.replace(' ', '')));
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, infoDate]);
 
 	return (
 		<StyledWrapper>
@@ -40,7 +43,9 @@ const CalendarHeader = () => {
 			)}
 
 			<div>
+				{today && <StyledMood> {today.mood} </StyledMood>}
 				<StyledTitle> Your today's note: </StyledTitle>
+
 				<StyledParagraph>
 					{today && today.note ? today.note : "You didn't leave a note today"}
 				</StyledParagraph>

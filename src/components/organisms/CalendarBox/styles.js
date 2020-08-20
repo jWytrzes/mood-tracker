@@ -61,8 +61,40 @@ export const StyledCalendar = styled(Calendar)`
 			border-radius: 10px;
 
 			abbr {
-				background-color: ${({ theme }) => theme.accent};
+				/* background-color: ${({ theme }) => theme.accent}; */
 				color: ${({ theme }) => theme.base};
+			}
+
+			&.happy abbr {
+				background-color: #abd562;
+			}
+
+			&.inlove abbr {
+				background-color: #ff84b7;
+			}
+
+			&.relaxed abbr {
+				background-color: #75e2d7;
+			}
+
+			&.pleased abbr {
+				background-color: #f9d629;
+			}
+
+			&.neutral abbr {
+				background-color: #52d3fc;
+			}
+
+			&.sad abbr {
+				background-color: #afafaf;
+			}
+
+			&.confused abbr {
+				background-color: #8c5bff;
+			}
+
+			&.angry abbr {
+				background-color: #f36d6d;
 			}
 		}
 

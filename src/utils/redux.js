@@ -3,6 +3,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	user: null,
 	theme: 'happy',
+	infoDate: null,
 };
 
 const userSlice = createSlice({
@@ -19,11 +20,14 @@ const userSlice = createSlice({
 		changeTheme: (state, action) => {
 			state.theme = action.payload;
 		},
+		setInfoDate: (state, action) => {
+			state.infoDate = action.payload;
+		},
 	},
 });
 
 export const {
-	actions: { setUserData, changeTheme },
+	actions: { setUserData, changeTheme, setInfoDate },
 	reducer: userData,
 } = userSlice;
 
