@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { userSelector, setUserData } from '../../../utils/redux';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../../utils/redux';
 import { routes, endpoints } from '../../../utils/constants';
 import { db, auth } from '../../../firebase';
 import H2 from '../../atoms/H2';
@@ -12,7 +12,6 @@ const NameForm = () => {
 	const [name, setName] = useState('');
 	const [redirect, setRedirect] = useState(false);
 	const dispatch = useDispatch();
-	const { user } = useSelector(userSelector);
 
 	const handleInput = (e) => {
 		setName(e.target.value);
@@ -27,7 +26,7 @@ const NameForm = () => {
 			db.ref(`${endpoints.users}${currentUser.uid}`).set({
 				name,
 			});
-			dispatch(setUserData({ ...user, name }));
+			dispatch(setUserData({ name }));
 			setRedirect(true);
 		}
 	};

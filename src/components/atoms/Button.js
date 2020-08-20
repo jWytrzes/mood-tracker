@@ -10,7 +10,7 @@ const Button = styled.button`
 	align-items: center;
 	justify-content: center;
 	border-radius: 13px;
-	width: calc(100% - 50px);
+	width: ${({ tertiary }) => (tertiary ? '100%' : 'calc(100% - 50px)')};
 	padding: 16px;
 	margin: 5px auto;
 	text-decoration: none;

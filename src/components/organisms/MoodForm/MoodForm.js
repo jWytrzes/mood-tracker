@@ -1,8 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
 import { auth, db } from '../../../firebase';
 import { endpoints, routes } from '../../../utils/constants';
+import { setInfoDate } from '../../../utils/redux';
+import { getFormattedDate, updateUserDataInStore } from '../../../utils';
 import MoodCards from '../../molecules/MoodCards/MoodCards';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
@@ -15,16 +18,19 @@ import {
 
 const MoodForm = () => {
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const handleSubmit = (values) => {
 		const userId = auth.currentUser.uid;
-		const today = new Date().toISOString().slice(0, 10);
+		const today = getFormattedDate();
 		db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${today}`)
 			.set({
 				mood: values.pickedMood.toLowerCase(),
 				note: values.note,
 			})
-			.then(() => {
+			.then((res) => {
+				updateUserDataInStore(userId);
+				dispatch(setInfoDate(today));
 				history.push(routes.calendar);
 			});
 	};

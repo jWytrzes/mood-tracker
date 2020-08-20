@@ -19,9 +19,7 @@ const StartPage = () => {
 	const { user } = useSelector(userSelector);
 
 	useEffect(() => {
-		if (!user) {
-			history.push(routes.login);
-		} else if (user.name.length) {
+		if (user.name.length) {
 			history.push(routes.home);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
