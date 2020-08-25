@@ -8,7 +8,7 @@ import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
 import Label from '../../atoms/Label';
 import FormError from '../../atoms/FormError';
-import { StyledWrapper } from './styles';
+import { StyledWrapper } from './LoginForm-styles';
 
 const LoginForm = () => {
 	const handleSubmit = (values) => {

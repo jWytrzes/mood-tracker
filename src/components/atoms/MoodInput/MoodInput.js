@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Field } from 'formik';
 import { changeTheme } from '../../../utils/redux';
 import { storage } from '../../../firebase';
-import { StyledLabel, StyledImg, StyledRadio, StyledName } from './styles';
+import {
+	StyledLabel,
+	StyledImg,
+	StyledRadio,
+	StyledName,
+} from './MoodInput-styles';
 
 const MoodInput = ({ icon, name, checked }) => {
 	const [link, setLink] = useState('');

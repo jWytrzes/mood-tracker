@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSelector, changeTheme, setInfoDate } from '../../../utils/redux';
 import { getFormattedDate } from '../../../utils';
-import { StyledWrapper, StyledCalendar } from './styles';
+import { StyledWrapper, StyledCalendar } from './CalendarBox-styles';
 import prevArrow from '../../../assets/leftArrow.svg';
 import nextArrow from '../../../assets/rightArrow.svg';
 

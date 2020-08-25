@@ -6,7 +6,7 @@ import { routes, endpoints } from '../../../utils/constants';
 import { db, auth } from '../../../firebase';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button';
-import { StyledInput } from './styles';
+import { StyledInput } from './NameForm-styles';
 
 const NameForm = () => {
 	const [name, setName] = useState('');

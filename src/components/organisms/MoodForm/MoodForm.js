@@ -14,7 +14,7 @@ import {
 	StyledForm,
 	StyledCard,
 	StyledTextarea,
-} from './styles';
+} from './MoodForm-styles';
 
 const MoodForm = () => {
 	const history = useHistory();

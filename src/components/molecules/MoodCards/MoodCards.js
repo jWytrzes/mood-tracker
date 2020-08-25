@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../../firebase';
 import { endpoints } from '../../../utils/constants';
 import MoodInput from '../../atoms/MoodInput/MoodInput';
-import { StyledWrapper } from './styles';
+import { StyledWrapper } from './MoodCards-styles';
 
 const MoodCards = ({ values }) => {
 	const [moods, setMoods] = useState([]);

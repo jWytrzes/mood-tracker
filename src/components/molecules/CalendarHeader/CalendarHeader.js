@@ -11,7 +11,7 @@ import {
 	StyledTitle,
 	StyledParagraph,
 	StyledMood,
-} from './styles';
+} from './CalendarHeader-styles';
 import Button from '../../atoms/Button';
 
 const CalendarHeader = () => {
