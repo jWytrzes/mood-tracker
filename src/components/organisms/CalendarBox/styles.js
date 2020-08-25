@@ -34,7 +34,15 @@ export const StyledCalendar = styled(Calendar)`
 	}
 
 	.react-calendar__navigation__arrow {
-		padding: 8px;
+		padding: 8px 16px;
+	}
+
+	.react-calendar__navigation__next-button {
+		margin-right: -15px;
+	}
+
+	.react-calendar__navigation__prev-button {
+		margin-left: -15px;
 	}
 
 	.react-calendar__month-view__weekdays {
@@ -51,6 +59,18 @@ export const StyledCalendar = styled(Calendar)`
 		abbr {
 			text-decoration: none;
 		}
+	}
+
+	.react-calendar__month-view__days__day {
+		abbr {
+			width: 35px;
+			height: 35px;
+			flex: 0 0 35px;
+		}
+	}
+
+	.react-calendar__year-view__months__month abbr {
+		padding: 4px;
 	}
 
 	.react-calendar__tile {
@@ -99,11 +119,8 @@ export const StyledCalendar = styled(Calendar)`
 		}
 
 		abbr {
-			width: 35px;
-			height: 35px;
 			border-radius: 8px;
 			display: flex;
-			flex: 0 0 35px;
 			align-items: center;
 			justify-content: center;
 			margin: 5px auto;

@@ -41,6 +41,7 @@ const CalendarBox = () => {
 				nextLabel={<img src={nextArrow} alt="Next month" />}
 				next2Label={null}
 				prev2Label={null}
+				minDetail="year"
 				formatShortWeekday={(locale, date) => date.toString().split(' ')[0][0]}
 				onClickDay={handleDayClick}
 			/>
