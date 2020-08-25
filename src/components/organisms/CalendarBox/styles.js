@@ -61,7 +61,7 @@ export const StyledCalendar = styled(Calendar)`
 			border-radius: 10px;
 
 			abbr {
-				/* background-color: ${({ theme }) => theme.accent}; */
+				background-color: ${({ theme }) => theme.accent};
 				color: ${({ theme }) => theme.base};
 			}
 

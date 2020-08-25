@@ -16,8 +16,13 @@ const CalendarBox = () => {
 			const date = getFormattedDate(value);
 			const dayData = user.moodData[date];
 			if (dayData) {
-				changeTheme(dayData.mood.replace(' ', ''));
+				dispatch(changeTheme(dayData.mood.replace(' ', '')));
 				dispatch(setInfoDate(date));
+			} else {
+				dispatch(setInfoDate(null));
+				if (!user.moodData[getFormattedDate()]) {
+					dispatch(changeTheme('happy'));
+				}
 			}
 		}
 	};

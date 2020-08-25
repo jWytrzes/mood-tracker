@@ -35,6 +35,10 @@ const MoodForm = () => {
 			});
 	};
 
+	const handleSkipClick = () => {
+		history.push(routes.calendar);
+	};
+
 	const validate = (values) => {
 		const errors = {};
 
@@ -64,6 +68,9 @@ const MoodForm = () => {
 								rows="3"
 							></Field>
 							<Button type="submit"> Save mood </Button>
+							<Button type="button" tertiary onClick={handleSkipClick}>
+								Skip for now
+							</Button>
 						</StyledCard>
 					</StyledWrapper>
 				</StyledForm>
