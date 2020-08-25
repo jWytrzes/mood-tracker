@@ -8,7 +8,7 @@ import Button from '../../atoms/Button';
 import FormGroup from '../../atoms/FormGroup';
 import Label from '../../atoms/Label';
 import FormError from '../../atoms/FormError';
-import { StyledWrapper } from './styles';
+import { StyledWrapper } from './SignUpForm-styles';
 
 const SignUpForm = () => {
 	const handleSubmit = (values) => {

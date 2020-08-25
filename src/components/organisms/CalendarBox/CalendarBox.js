@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSelector, changeTheme, setInfoDate } from '../../../utils/redux';
 import { getFormattedDate } from '../../../utils';
-import { StyledWrapper, StyledCalendar } from './styles';
+import { StyledWrapper, StyledCalendar } from './CalendarBox-styles';
 import prevArrow from '../../../assets/leftArrow.svg';
 import nextArrow from '../../../assets/rightArrow.svg';
 
@@ -16,8 +16,13 @@ const CalendarBox = () => {
 			const date = getFormattedDate(value);
 			const dayData = user.moodData[date];
 			if (dayData) {
-				changeTheme(dayData.mood.replace(' ', ''));
+				dispatch(changeTheme(dayData.mood.replace(' ', '')));
 				dispatch(setInfoDate(date));
+			} else {
+				dispatch(setInfoDate(null));
+				if (!user.moodData[getFormattedDate()]) {
+					dispatch(changeTheme('happy'));
+				}
 			}
 		}
 	};
@@ -36,6 +41,7 @@ const CalendarBox = () => {
 				nextLabel={<img src={nextArrow} alt="Next month" />}
 				next2Label={null}
 				prev2Label={null}
+				minDetail="year"
 				formatShortWeekday={(locale, date) => date.toString().split(' ')[0][0]}
 				onClickDay={handleDayClick}
 			/>

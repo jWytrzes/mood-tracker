@@ -14,7 +14,7 @@ import {
 	StyledForm,
 	StyledCard,
 	StyledTextarea,
-} from './styles';
+} from './MoodForm-styles';
 
 const MoodForm = () => {
 	const history = useHistory();
@@ -33,6 +33,10 @@ const MoodForm = () => {
 				dispatch(setInfoDate(today));
 				history.push(routes.calendar);
 			});
+	};
+
+	const handleSkipClick = () => {
+		history.push(routes.calendar);
 	};
 
 	const validate = (values) => {
@@ -64,6 +68,9 @@ const MoodForm = () => {
 								rows="3"
 							></Field>
 							<Button type="submit"> Save mood </Button>
+							<Button type="button" tertiary onClick={handleSkipClick}>
+								Skip for now
+							</Button>
 						</StyledCard>
 					</StyledWrapper>
 				</StyledForm>
