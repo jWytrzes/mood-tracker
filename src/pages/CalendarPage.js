@@ -8,6 +8,7 @@ import { genereateRandomData } from '../utils';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 import CalendarBox from '../components/organisms/CalendarBox/CalendarBox';
 import Button from '../components/atoms/Button';
+import Loader from '../components/atoms/Loader/Loader';
 
 const StyledWrapper = styled.div`
 	min-height: 100vh;
@@ -35,12 +36,18 @@ const CalendarPage = () => {
 		setIsLoading(false);
 	}, [user.moodData]);
 
+	const handleRandomClick = () => {
+		setIsLoading(true);
+		genereateRandomData();
+	};
+
 	return (
 		<StyledWrapper>
+			{isLoading && <Loader />}
 			<CalendarHeader />
 			<CalendarBox />
 			<StyledButtonsWrapper>
-				<Button small secondary onClick={genereateRandomData}>
+				<Button small secondary onClick={handleRandomClick}>
 					Generate random data
 				</Button>
 				<Button small={1} as={Link} to={routes.stats}>
