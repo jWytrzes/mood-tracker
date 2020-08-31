@@ -16,6 +16,8 @@ const Button = styled.button`
 	margin: 5px auto;
 	text-decoration: none;
 	white-space: nowrap;
+	font-weight: ${({ theme, secondary }) =>
+		secondary ? theme.font.weight.semiBold : theme.font.weight.normal};
 `;
 
 export default Button;
