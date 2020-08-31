@@ -7,6 +7,8 @@ import {
 	Redirect,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { auth } from '../firebase';
+import { updateUserDataInStore } from '../utils';
 import { routes } from '../utils/constants';
 import store, { userSelector } from '../utils/redux';
 import * as themes from '../utils/theme';
@@ -17,8 +19,7 @@ import StartPage from './StartPage';
 import CalendarPage from './CalendarPage';
 import Login from './Login';
 import SignUp from './SignUp';
-import { auth } from '../firebase';
-import { updateUserDataInStore } from '../utils';
+import Stats from './Stats';
 
 const PrivateRoute = ({ children, ...props }) => {
 	const authenticated = auth.currentUser;
@@ -64,6 +65,9 @@ const App = () => {
 						</Route>
 						<Route path={routes.signup}>
 							<SignUp />
+						</Route>
+						<Route>
+							<Stats />
 						</Route>
 					</Switch>
 				</Router>

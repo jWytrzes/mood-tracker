@@ -4,6 +4,7 @@ export const routes = {
 	calendar: '/calendar',
 	login: '/login',
 	signup: '/signup',
+	stats: '/stats',
 };
 
 export const endpoints = {
