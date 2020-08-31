@@ -44,8 +44,8 @@ export const neutral = {
 
 export const sad = {
 	...common,
-	accent: '#AFAFAF',
-	accentLight: '#F4F4F4',
+	accent: '#B49E72',
+	accentLight: '#F5F1EB',
 };
 
 export const confused = {

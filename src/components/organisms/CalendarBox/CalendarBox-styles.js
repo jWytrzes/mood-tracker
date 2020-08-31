@@ -106,7 +106,7 @@ export const StyledCalendar = styled(Calendar)`
 			}
 
 			&.sad abbr {
-				background-color: #afafaf;
+				background-color: #b49e72;
 			}
 
 			&.confused abbr {
@@ -164,7 +164,7 @@ export const StyledCalendar = styled(Calendar)`
 		}
 
 		&.sad abbr::before {
-			background-color: #afafaf;
+			background-color: #b49e72;
 		}
 
 		&.confused abbr::before {

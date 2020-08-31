@@ -18,8 +18,10 @@ const StyledWrapper = styled.div`
 	}
 `;
 
-const StyledButton = styled(Button)`
-	margin: 15px auto 30px;
+const StyledButtonsWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 0 30px;
 `;
 
 const CalendarPage = () => {
@@ -27,9 +29,14 @@ const CalendarPage = () => {
 		<StyledWrapper>
 			<CalendarHeader />
 			<CalendarBox />
-			<StyledButton secondary={1} as={Link} to={routes.stats}>
-				See stats
-			</StyledButton>
+			<StyledButtonsWrapper>
+				<Button small secondary>
+					Generate andom data
+				</Button>
+				<Button small={1} as={Link} to={routes.stats}>
+					See stats
+				</Button>
+			</StyledButtonsWrapper>
 		</StyledWrapper>
 	);
 };
