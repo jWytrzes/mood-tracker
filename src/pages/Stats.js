@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
-import Button from '../components/atoms/Button';
+import Button from '../components/atoms/Button/Button';
 import H1 from '../components/atoms/H2';
 import MoodChart from '../components/organisms/MoodChart/MoodChart';
 import leftArrowWhite from '../assets/leftArrowWhite.svg';

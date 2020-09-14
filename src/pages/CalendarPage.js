@@ -7,7 +7,7 @@ import { routes } from '../utils/constants';
 import { genereateRandomData } from '../utils';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 import CalendarBox from '../components/organisms/CalendarBox/CalendarBox';
-import Button from '../components/atoms/Button';
+import Button from '../components/atoms/Button/Button';
 import Loader from '../components/atoms/Loader/Loader';
 
 const StyledWrapper = styled.div`

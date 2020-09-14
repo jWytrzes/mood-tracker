@@ -12,7 +12,7 @@ import {
 	StyledParagraph,
 	StyledMood,
 } from './CalendarHeader-styles';
-import Button from '../../atoms/Button';
+import Button from '../../atoms/Button/Button';
 
 const CalendarHeader = () => {
 	const { user, infoDate } = useSelector(userSelector);

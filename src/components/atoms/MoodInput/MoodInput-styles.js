@@ -10,6 +10,7 @@ export const StyledLabel = styled.label`
 	align-items: center;
 	padding: 10px 12px;
 	text-align: center;
+	cursor: pointer;
 	transition: background-color 0.2s ease-out, color 0.2s ease-out;
 	will-change: background-color, color;
 `;

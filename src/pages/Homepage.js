@@ -22,8 +22,50 @@ const StyledWrapper = styled.div`
 
 	@media (min-width: 768px) {
 		max-height: 677px;
-		min-height: unset;
+		min-height: 100vh;
 		height: 100%;
+	}
+`;
+
+const StyledInner = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+
+	@media (min-width: 768px) {
+		max-width: 1000px;
+		width: 100%;
+		margin: auto;
+		flex: 0;
+	}
+`;
+
+const StyledIconsInfo = styled.div`
+	position: absolute;
+	top: 4px;
+	right: 5px;
+	z-index: 999;
+	font-size: 1rem;
+
+	a {
+		color: ${({ theme }) => theme.base};
+		text-decoration: none;
+		border-bottom: 1px solid ${({ theme }) => theme.base};
+		transition: color 0.2s ease-in;
+		will-change: color;
+
+		&:hover {
+			color: ${({ theme }) => theme.textPrimary};
+		}
+	}
+
+	@media (min-width: 1200px) {
+		transform: rotate(90deg);
+		bottom: 0px;
+		top: unset;
+		right: 10px;
+		transform-origin: top right;
+		font-size: 1.4rem;
 	}
 `;
 
@@ -49,9 +91,32 @@ const Homepage = () => {
 
 	return (
 		<StyledWrapper>
-			<H1>Hello, {user && <b> {user.name} </b>}</H1>
-			<H2> How are you today? </H2>
-			<MoodForm />
+			<StyledInner>
+				<H1>Hello, {user && <b> {user.name} </b>}</H1>
+				<H2> How are you today? </H2>
+				<MoodForm />
+			</StyledInner>
+			<StyledIconsInfo>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://icons8.com/icons/set/undefined"
+				>
+					In Love
+				</a>
+				,{' '}
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://icons8.com/icons/set/undefined"
+				>
+					Sleeping
+				</a>{' '}
+				and other icons by{' '}
+				<a target="_blank" rel="noopener noreferrer" href="https://icons8.com">
+					Icons8
+				</a>
+			</StyledIconsInfo>
 		</StyledWrapper>
 	);
 };

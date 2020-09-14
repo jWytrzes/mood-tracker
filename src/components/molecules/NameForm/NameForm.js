@@ -5,7 +5,7 @@ import { setUserData } from '../../../utils/redux';
 import { routes, endpoints } from '../../../utils/constants';
 import { db, auth } from '../../../firebase';
 import H2 from '../../atoms/H2';
-import Button from '../../atoms/Button';
+import Button from '../../atoms/Button/Button';
 import { StyledInput } from './NameForm-styles';
 
 const NameForm = () => {

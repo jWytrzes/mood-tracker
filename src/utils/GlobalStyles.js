@@ -14,10 +14,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.4rem;
     line-height: 1.5;
     color: ${({ theme }) => theme.textPrimary};
-
-    @media (min-width: 768px) {
-      background-color: ${({ theme }) => theme.lightGrey};
-    }
   }
 
   html, body {
