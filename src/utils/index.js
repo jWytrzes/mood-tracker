@@ -1,6 +1,7 @@
 import { endpoints } from './constants';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 import store, { setUserData } from './redux';
+import { moodsArray, randomMessages } from './constants';
 
 export const getFormattedDate = (date = new Date()) => {
 	let dd = date.getDate();
@@ -27,5 +28,29 @@ export const updateUserDataInStore = (userId) => {
 			});
 	} else {
 		store.dispatch(setUserData(null));
+	}
+};
+
+export const genereateRandomData = () => {
+	const userId = auth.currentUser.uid;
+	if (userId) {
+		const now = new Date();
+		const yearAgo = new Date();
+		yearAgo.setFullYear(now.getFullYear() - 1);
+
+		let days = [];
+		for (let d = yearAgo; d <= now; d.setDate(d.getDate() + 1)) {
+			days.push(new Date(d));
+		}
+
+		days.forEach((day) => {
+			const dayKey = getFormattedDate(day);
+			db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${dayKey}`).set({
+				mood: moodsArray[Math.floor(Math.random() * moodsArray.length)],
+				note: randomMessages[Math.floor(Math.random() * randomMessages.length)],
+			});
+		});
+
+		updateUserDataInStore(userId);
 	}
 };

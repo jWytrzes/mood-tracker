@@ -27,3 +27,24 @@ export const months = {
 	'11': 'nov',
 	'12': 'dec',
 };
+
+export const moodsArray = [
+	'inlove',
+	'relaxed',
+	'pleased',
+	'neutral',
+	'sad',
+	'confused',
+	'angry',
+];
+
+export const randomMessages = [
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+	'rutrum consequat',
+	'Quisque non enim urna.',
+	'Vivamus vitae quam tortor',
+	':(',
+	':)',
+	'In ac semper augue.',
+	null,
+];
