@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
 	will-change: background-color;
 
 	@media (min-width: 768px) {
-		max-height: 677px;
+		/* max-height: 677px; */
 		min-height: 100vh;
 		height: 100%;
 	}

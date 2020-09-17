@@ -8,6 +8,13 @@ export const StyledWrapper = styled.header`
 	display: flex;
 	align-items: center;
 	overflow-x: hidden;
+
+	@media (min-width: 768px) {
+		max-width: 500px;
+		width: 100%;
+		margin: 25px auto;
+		border-radius: 25px;
+	}
 `;
 
 export const StyledCalendarCard = styled.div`
@@ -43,6 +50,10 @@ export const StyledParagraph = styled.p`
 	font-size: 1.2rem;
 	max-height: 51px;
 	overflow-y: auto;
+
+	@media (min-width: 768px) {
+		max-height: unset;
+	}
 `;
 
 export const StyledMood = styled.div`
