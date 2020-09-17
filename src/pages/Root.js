@@ -47,7 +47,6 @@ const App = () => {
 			theme={themes[useSelector(userSelector).theme] || themes.happy}
 		>
 			<GlobalStyle />
-			{/* <PhoneFrame> */}
 			<Router>
 				<Switch>
 					<PrivateRoute exact path={routes.home}>
@@ -65,12 +64,11 @@ const App = () => {
 					<Route path={routes.signup}>
 						<SignUp />
 					</Route>
-					<Route>
+					<PrivateRoute path={routes.stats}>
 						<Stats />
-					</Route>
+					</PrivateRoute>
 				</Switch>
 			</Router>
-			{/* </PhoneFrame> */}
 		</ThemeProvider>
 	);
 };

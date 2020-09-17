@@ -17,6 +17,13 @@ const StyledHeader = styled.div`
 	display: flex;
 `;
 
+const StyledWrapper = styled.div`
+	@media (min-width: 768px) {
+		margin: auto;
+		width: 100%;
+	}
+`;
+
 const Stats = () => {
 	const history = useHistory();
 
@@ -26,13 +33,15 @@ const Stats = () => {
 
 	return (
 		<MainTemplate>
-			<StyledHeader>
-				<StyledButton small={1} onClick={handleBackClick}>
-					<img src={leftArrowWhite} alt="Go back" />
-				</StyledButton>
-				<H1> Your stats </H1>
-			</StyledHeader>
-			<MoodChart />
+			<StyledWrapper>
+				<StyledHeader>
+					<StyledButton small={1} onClick={handleBackClick}>
+						<img src={leftArrowWhite} alt="Go back" />
+					</StyledButton>
+					<H1> Your stats </H1>
+				</StyledHeader>
+				<MoodChart />
+			</StyledWrapper>
 		</MainTemplate>
 	);
 };
