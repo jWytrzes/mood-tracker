@@ -29,6 +29,7 @@ export const months = {
 };
 
 export const moodsArray = [
+	'happy',
 	'inlove',
 	'relaxed',
 	'pleased',

@@ -46,8 +46,8 @@ export const genereateRandomData = () => {
 		days.forEach((day) => {
 			const dayKey = getFormattedDate(day);
 			db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${dayKey}`).set({
-				mood: moodsArray[Math.floor(Math.random() * moodsArray.length)],
-				note: randomMessages[Math.floor(Math.random() * randomMessages.length)],
+				mood: moodsArray[(Math.random() * moodsArray.length) | 0],
+				note: randomMessages[(Math.random() * randomMessages.length) | 0],
 			});
 		});
 
