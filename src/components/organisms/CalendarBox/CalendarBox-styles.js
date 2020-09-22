@@ -6,6 +6,10 @@ export const StyledWrapper = styled.div`
 	flex-direction: column;
 	flex: 1;
 	padding: 0 25px;
+
+	@media (min-width: 768px) {
+		margin-top: 70px;
+	}
 `;
 
 export const StyledCalendar = styled(Calendar)`

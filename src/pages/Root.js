@@ -13,7 +13,6 @@ import { routes } from '../utils/constants';
 import store, { userSelector } from '../utils/redux';
 import * as themes from '../utils/theme';
 import GlobalStyle from '../utils/GlobalStyles';
-import PhoneFrame from '../templates/PhoneFrame/PhoneFrame';
 import Homepage from './Homepage';
 import StartPage from './StartPage';
 import CalendarPage from './CalendarPage';
@@ -48,30 +47,28 @@ const App = () => {
 			theme={themes[useSelector(userSelector).theme] || themes.happy}
 		>
 			<GlobalStyle />
-			<PhoneFrame>
-				<Router>
-					<Switch>
-						<PrivateRoute exact path={routes.home}>
-							<Homepage />
-						</PrivateRoute>
-						<PrivateRoute path={routes.start}>
-							<StartPage />
-						</PrivateRoute>
-						<PrivateRoute path={routes.calendar}>
-							<CalendarPage />
-						</PrivateRoute>
-						<Route path={routes.login}>
-							<Login />
-						</Route>
-						<Route path={routes.signup}>
-							<SignUp />
-						</Route>
-						<Route>
-							<Stats />
-						</Route>
-					</Switch>
-				</Router>
-			</PhoneFrame>
+			<Router>
+				<Switch>
+					<PrivateRoute exact path={routes.home}>
+						<Homepage />
+					</PrivateRoute>
+					<PrivateRoute path={routes.start}>
+						<StartPage />
+					</PrivateRoute>
+					<PrivateRoute path={routes.calendar}>
+						<CalendarPage />
+					</PrivateRoute>
+					<Route path={routes.login}>
+						<Login />
+					</Route>
+					<Route path={routes.signup}>
+						<SignUp />
+					</Route>
+					<PrivateRoute path={routes.stats}>
+						<Stats />
+					</PrivateRoute>
+				</Switch>
+			</Router>
 		</ThemeProvider>
 	);
 };

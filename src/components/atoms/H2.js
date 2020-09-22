@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const H1 = styled.h1`
+const H2 = styled.h2`
 	font-size: 2.4rem;
 	font-weight: ${({ theme }) => theme.font.weight.regular};
 	margin: 0;
@@ -8,6 +8,10 @@ const H1 = styled.h1`
 	b {
 		font-weight: ${({ theme }) => theme.font.weight.semiBold};
 	}
+
+	@media (min-width: 768px) {
+		font-size: 2.8rem;
+	}
 `;
 
-export default H1;
+export default H2;

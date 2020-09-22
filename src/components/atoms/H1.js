@@ -8,6 +8,10 @@ const H1 = styled.h1`
 	b {
 		font-weight: ${({ theme }) => theme.font.weight.semiBold};
 	}
+
+	@media (min-width: 768px) {
+		font-size: 3.6rem;
+	}
 `;
 
 export default H1;

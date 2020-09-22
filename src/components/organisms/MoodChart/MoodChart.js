@@ -32,20 +32,23 @@ const MoodChart = () => {
 			}
 			const moodsCount = moods.length;
 			moods = countOccurrences(moods);
-
 			let finalData = [];
+
 			for (let key in moods) {
 				finalData = [
 					...finalData,
 					{
 						title: key,
 						value: Math.round((moods[key] / moodsCount) * 100 * 100) / 100,
-						color: allMoods.find(
+						accentColor: allMoods.find(
 							(item) => item.name.toLowerCase().replace(' ', '') === key,
 						).color,
 					},
 				];
 			}
+			finalData.forEach(
+				(item, index) => (item.color = index % 2 === 0 ? '#fbfbfb' : '#f5f5f5'),
+			);
 			setChartData(finalData);
 		}
 	}, [user, allMoods]);
@@ -58,12 +61,19 @@ const MoodChart = () => {
 		<StyledWrapper>
 			{chartData && (
 				<InnerWrapper>
-					<PieChart
-						data={chartData}
-						label={({ dataEntry }) => `${dataEntry.value}%`}
-						labelStyle={{ fill: '#fff', fontSize: '.7rem' }}
-						labelPosition={70}
-					/>
+					{chartData && chartData.length && (
+						<PieChart
+							data={chartData}
+							label={({ dataEntry }) => `${dataEntry.value}%`}
+							labelStyle={(index) => {
+								return {
+									fontSize: '.7rem',
+									fill: chartData[index].accentColor,
+								};
+							}}
+							labelPosition={70}
+						/>
+					)}
 				</InnerWrapper>
 			)}
 			<StyledUl>

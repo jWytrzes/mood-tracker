@@ -8,12 +8,13 @@ import { setInfoDate } from '../../../utils/redux';
 import { getFormattedDate, updateUserDataInStore } from '../../../utils';
 import MoodCards from '../../molecules/MoodCards/MoodCards';
 import H2 from '../../atoms/H2';
-import Button from '../../atoms/Button';
+import Button from '../../atoms/Button/Button';
 import {
 	StyledWrapper,
 	StyledForm,
 	StyledCard,
 	StyledTextarea,
+	StyledButtons,
 } from './MoodForm-styles';
 
 const MoodForm = () => {
@@ -67,10 +68,12 @@ const MoodForm = () => {
 								placeholder="It was an awesome day!"
 								rows="3"
 							></Field>
-							<Button type="submit"> Save mood </Button>
-							<Button type="button" tertiary onClick={handleSkipClick}>
-								Skip for now
-							</Button>
+							<StyledButtons>
+								<Button type="submit"> Save mood </Button>
+								<Button type="button" tertiary onClick={handleSkipClick}>
+									Skip for now
+								</Button>
+							</StyledButtons>
 						</StyledCard>
 					</StyledWrapper>
 				</StyledForm>

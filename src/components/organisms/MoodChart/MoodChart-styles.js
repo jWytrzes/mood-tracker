@@ -6,7 +6,8 @@ export const StyledWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
 	margin: 10px auto;
-	max-width: 90%;
+	width: 90%;
+	max-width: 400px;
 `;
 
 export const StyledUl = styled.ul`

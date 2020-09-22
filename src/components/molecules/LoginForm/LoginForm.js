@@ -4,7 +4,7 @@ import { Formik, Field, Form } from 'formik';
 import { auth } from '../../../firebase';
 import { routes } from '../../../utils/constants';
 import Input from '../../atoms/Input';
-import Button from '../../atoms/Button';
+import Button from '../../atoms/Button/Button';
 import FormGroup from '../../atoms/FormGroup';
 import Label from '../../atoms/Label';
 import FormError from '../../atoms/FormError';
