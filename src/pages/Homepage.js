@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { db, auth } from '../firebase';
-import { userSelector } from '../utils/redux';
-import { routes, endpoints } from '../utils/constants';
-import { getFormattedDate, updateUserDataInStore } from '../utils';
+import { userSelector, stateSelector } from '../utils/redux';
+import { routes, steps } from '../utils/constants';
 import H1 from '../components/atoms/H1';
 import H2 from '../components/atoms/H2';
 import MoodForm from '../components/organisms/MoodForm/MoodForm';
+import Loader from '../components/atoms/Loader/Loader';
 
 const StyledWrapper = styled.div`
 	background-color: ${({ theme }) => theme.accent};
@@ -69,26 +68,26 @@ const StyledIconsInfo = styled.div`
 `;
 
 const Homepage = () => {
-	const history = useHistory();
 	const { user } = useSelector(userSelector);
+	const { step } = useSelector(stateSelector);
+	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
-		if (user) {
-			const userId = auth.currentUser.uid;
-			const today = getFormattedDate();
-			db.ref(`${endpoints.users}${userId}${endpoints.moodData}/${today}`)
-				.once('value')
-				.then((snapshot) => {
-					if (snapshot.val()) {
-						updateUserDataInStore(userId);
-						history.push(routes.calendar);
-					}
-				});
+		if (user && step) {
+			if (step === steps.name) {
+				setRedirect(routes.start);
+			} else if (step === steps.done) {
+				setRedirect(routes.calendar);
+			}
+			setIsLoading(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [user, step]);
 
-	return (
+	return isLoading ? (
+		<Loader />
+	) : (
 		<StyledWrapper>
 			<StyledInner>
 				<H1>Hello, {user && <b> {user.name} </b>}</H1>
@@ -116,6 +115,7 @@ const Homepage = () => {
 					Icons8
 				</a>
 			</StyledIconsInfo>
+			{redirect && <Redirect to={redirect} />}
 		</StyledWrapper>
 	);
 };

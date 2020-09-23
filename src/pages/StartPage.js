@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../utils/redux';
-import { routes } from '../utils/constants';
+import { userSelector, stateSelector } from '../utils/redux';
+import { routes, steps } from '../utils/constants';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
 import H1 from '../components/atoms/H1';
 import NameForm from '../components/molecules/NameForm/NameForm';
+import Loader from '../components/atoms/Loader/Loader';
 
 const StyledWrapper = styled.div`
 	display: flex;
@@ -21,17 +22,26 @@ const StyledWrapper = styled.div`
 `;
 
 const StartPage = () => {
-	const history = useHistory();
 	const { user } = useSelector(userSelector);
+	const { step } = useSelector(stateSelector);
+	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
-		if (user.name.length) {
-			history.push(routes.home);
+		if (user && step) {
+			if (step === steps.mood) {
+				setRedirect(routes.home);
+			} else if (step === steps.done) {
+				setRedirect(routes.calendar);
+			}
+			setIsLoading(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, step]);
 
-	return (
+	return isLoading ? (
+		<Loader />
+	) : (
 		<MainTemplate>
 			<StyledWrapper>
 				<H1>
@@ -39,6 +49,7 @@ const StartPage = () => {
 				</H1>
 				<NameForm />
 			</StyledWrapper>
+			{redirect && <Redirect to={redirect} />}
 		</MainTemplate>
 	);
 };

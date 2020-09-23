@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../utils/redux';
-import { routes } from '../utils/constants';
+import { userSelector, stateSelector } from '../utils/redux';
+import { routes, steps } from '../utils/constants';
 import { genereateRandomData } from '../utils';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 import CalendarBox from '../components/organisms/CalendarBox/CalendarBox';
@@ -19,6 +19,7 @@ const StyledWrapper = styled.div`
 		margin: auto;
 		min-height: unset;
 		height: 100%;
+		width: 100%;
 	}
 `;
 
@@ -40,12 +41,24 @@ const StyledButtonsWrapper = styled.div`
 `;
 
 const CalendarPage = () => {
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 	const { user } = useSelector(userSelector);
+	const { step } = useSelector(stateSelector);
 
 	useEffect(() => {
-		setIsLoading(false);
+		user.moodData ? setIsLoading(false) : setIsLoading(true);
 	}, [user.moodData]);
+
+	useEffect(() => {
+		if (step) {
+			if (step === steps.name) {
+				setRedirect(routes.start);
+			}
+			setIsLoading(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [step]);
 
 	const handleRandomClick = () => {
 		setIsLoading(true);
@@ -65,6 +78,7 @@ const CalendarPage = () => {
 					See stats
 				</Button>
 			</StyledButtonsWrapper>
+			{redirect && <Redirect to={redirect} />}
 		</StyledWrapper>
 	);
 };

@@ -29,7 +29,7 @@ const MoodForm = () => {
 				mood: values.pickedMood.toLowerCase(),
 				note: values.note,
 			})
-			.then((res) => {
+			.then(() => {
 				updateUserDataInStore(userId);
 				dispatch(setInfoDate(today));
 				history.push(routes.calendar);

@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	user: null,
+	user: {},
 	theme: 'happy',
 	infoDate: null,
 };
@@ -33,8 +33,29 @@ export const {
 
 export const userSelector = (state) => state.userData;
 
+const initialAppState = {
+	step: null,
+};
+
+const stateSlice = createSlice({
+	name: 'State',
+	initialState: initialAppState,
+	reducers: {
+		updateStep: (state, action) => {
+			state.step = action.payload;
+		},
+	},
+});
+
+export const {
+	actions: { updateStep },
+	reducer: stateData,
+} = stateSlice;
+
+export const stateSelector = (state) => state.stateData;
+
 const store = configureStore({
-	reducer: { userData },
+	reducer: { userData, stateData },
 });
 
 export default store;
