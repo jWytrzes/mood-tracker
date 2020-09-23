@@ -38,7 +38,7 @@ const Stats = () => {
 					<StyledButton small={1} onClick={handleBackClick}>
 						<img src={leftArrowWhite} alt="Go back" />
 					</StyledButton>
-					<H1> Your stats </H1>
+					<H1 onClick={handleBackClick}> Your stats </H1>
 				</StyledHeader>
 				<MoodChart />
 			</StyledWrapper>

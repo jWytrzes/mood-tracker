@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { routes } from '../utils/constants';
+import { routes, steps } from '../utils/constants';
+import { userSelector, stateSelector } from '../utils/redux';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
 import H1 from '../components/atoms/H2';
 import SignUpForm from '../components/molecules/SignUpForm/SignUpForm';
-import { userSelector } from '../utils/redux';
 
 const StyledWrapper = styled.div`
 	display: flex;
@@ -23,13 +23,20 @@ const StyledWrapper = styled.div`
 const Login = () => {
 	const history = useHistory();
 	const { user } = useSelector(userSelector);
+	const { step } = useSelector(stateSelector);
 
 	useEffect(() => {
-		if (user) {
-			history.push(routes.start);
+		if (user && step) {
+			if (step === steps.name) {
+				history.push(routes.start);
+			} else if (step === steps.mood) {
+				history.push(routes.home);
+			} else {
+				history.push(routes.calendar);
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, step]);
 
 	return (
 		<MainTemplate>

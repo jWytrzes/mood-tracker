@@ -1,6 +1,6 @@
-import { endpoints } from './constants';
+import { endpoints, steps } from './constants';
 import { db, auth } from '../firebase';
-import store, { setUserData } from './redux';
+import store, { setUserData, updateStep } from './redux';
 import { moodsArray, randomMessages } from './constants';
 
 export const getFormattedDate = (date = new Date()) => {
@@ -24,7 +24,18 @@ export const updateUserDataInStore = (userId) => {
 		db.ref(`${endpoints.users}${userId}`)
 			.once('value')
 			.then((snapshot) => {
-				store.dispatch(setUserData(snapshot.val()));
+				const userInfo = snapshot.val() || {};
+				store.dispatch(setUserData(userInfo));
+				if (!userInfo || !userInfo.name || !userInfo.name.length) {
+					store.dispatch(updateStep(steps.name));
+				} else if (
+					!userInfo.moodData ||
+					!userInfo.moodData[getFormattedDate()]
+				) {
+					store.dispatch(updateStep(steps.mood));
+				} else {
+					store.dispatch(updateStep(steps.done));
+				}
 			});
 	} else {
 		store.dispatch(setUserData(null));

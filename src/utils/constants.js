@@ -13,6 +13,12 @@ export const endpoints = {
 	moodData: '/moodData/',
 };
 
+export const steps = {
+	done: 'DONE',
+	name: 'NAME',
+	mood: 'MOOD',
+};
+
 export const months = {
 	'01': 'jan',
 	'02': 'feb',

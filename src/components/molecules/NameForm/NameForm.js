@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUserData } from '../../../utils/redux';
-import { routes, endpoints } from '../../../utils/constants';
+import { setUserData, updateStep } from '../../../utils/redux';
+import { endpoints, steps } from '../../../utils/constants';
 import { db, auth } from '../../../firebase';
 import H2 from '../../atoms/H2';
 import Button from '../../atoms/Button/Button';
@@ -10,7 +9,6 @@ import { StyledInput } from './NameForm-styles';
 
 const NameForm = () => {
 	const [name, setName] = useState('');
-	const [redirect, setRedirect] = useState(false);
 	const dispatch = useDispatch();
 
 	const handleInput = (e) => {
@@ -27,7 +25,7 @@ const NameForm = () => {
 				name,
 			});
 			dispatch(setUserData({ name }));
-			setRedirect(true);
+			dispatch(updateStep(steps.mood));
 		}
 	};
 
@@ -41,7 +39,6 @@ const NameForm = () => {
 				onChange={handleInput}
 			/>
 			<Button onClick={handleButtonClick}> Let's go </Button>
-			{redirect && <Redirect push to={routes.home} />}
 		</div>
 	);
 };

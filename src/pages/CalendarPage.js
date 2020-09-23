@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../utils/redux';
-import { routes } from '../utils/constants';
+import { userSelector, stateSelector } from '../utils/redux';
+import { routes, steps } from '../utils/constants';
 import { genereateRandomData } from '../utils';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 import CalendarBox from '../components/organisms/CalendarBox/CalendarBox';
@@ -40,12 +40,24 @@ const StyledButtonsWrapper = styled.div`
 `;
 
 const CalendarPage = () => {
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const { user } = useSelector(userSelector);
+	const { step } = useSelector(stateSelector);
+	const history = useHistory();
 
 	useEffect(() => {
-		setIsLoading(false);
+		user.moodData ? setIsLoading(false) : setIsLoading(true);
 	}, [user.moodData]);
+
+	useEffect(() => {
+		if (step) {
+			if (step === steps.name) {
+				history.push(routes.start);
+			}
+			setIsLoading(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [step]);
 
 	const handleRandomClick = () => {
 		setIsLoading(true);
