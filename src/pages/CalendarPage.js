@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector, stateSelector } from '../utils/redux';
 import { routes, steps } from '../utils/constants';
@@ -19,6 +19,7 @@ const StyledWrapper = styled.div`
 		margin: auto;
 		min-height: unset;
 		height: 100%;
+		width: 100%;
 	}
 `;
 
@@ -41,9 +42,9 @@ const StyledButtonsWrapper = styled.div`
 
 const CalendarPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 	const { user } = useSelector(userSelector);
 	const { step } = useSelector(stateSelector);
-	const history = useHistory();
 
 	useEffect(() => {
 		user.moodData ? setIsLoading(false) : setIsLoading(true);
@@ -52,7 +53,7 @@ const CalendarPage = () => {
 	useEffect(() => {
 		if (step) {
 			if (step === steps.name) {
-				history.push(routes.start);
+				setRedirect(routes.start);
 			}
 			setIsLoading(false);
 		}
@@ -77,6 +78,7 @@ const CalendarPage = () => {
 					See stats
 				</Button>
 			</StyledButtonsWrapper>
+			{redirect && <Redirect to={redirect} />}
 		</StyledWrapper>
 	);
 };

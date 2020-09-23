@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector, stateSelector } from '../utils/redux';
 import { routes, steps } from '../utils/constants';
@@ -22,17 +22,17 @@ const StyledWrapper = styled.div`
 `;
 
 const StartPage = () => {
-	const history = useHistory();
 	const { user } = useSelector(userSelector);
 	const { step } = useSelector(stateSelector);
 	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
 		if (user && step) {
 			if (step === steps.mood) {
-				history.push(routes.home);
+				setRedirect(routes.home);
 			} else if (step === steps.done) {
-				history.push(routes.calendar);
+				setRedirect(routes.calendar);
 			}
 			setIsLoading(false);
 		}
@@ -49,6 +49,7 @@ const StartPage = () => {
 				</H1>
 				<NameForm />
 			</StyledWrapper>
+			{redirect && <Redirect to={redirect} />}
 		</MainTemplate>
 	);
 };

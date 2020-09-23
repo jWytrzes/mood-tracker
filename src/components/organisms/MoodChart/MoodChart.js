@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { userSelector } from '../../../utils/redux';
 import { db } from '../../../firebase';
 import { endpoints } from '../../../utils/constants';
-import MoodLabel from '../../atoms/MoodLabel/MoodLabel';
+import MoodLabel from '../../molecules/MoodLabel/MoodLabel';
 import { StyledWrapper, InnerWrapper, StyledUl } from './MoodChart-styles';
 
 const MoodChart = () => {

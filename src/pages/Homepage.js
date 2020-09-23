@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector, stateSelector } from '../utils/redux';
 import { routes, steps } from '../utils/constants';
@@ -68,27 +68,20 @@ const StyledIconsInfo = styled.div`
 `;
 
 const Homepage = () => {
-	const history = useHistory();
 	const { user } = useSelector(userSelector);
 	const { step } = useSelector(stateSelector);
 	const [isLoading, setIsLoading] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
-		// if (step) {
-		// 	if (step === steps.done) {
-		// 		history.push(routes.calendar);
-		// 	}
-		// 	setIsLoading(false);
-		// }
 		if (user && step) {
 			if (step === steps.name) {
-				history.push(routes.start);
+				setRedirect(routes.start);
 			} else if (step === steps.done) {
-				history.push(routes.calendar);
+				setRedirect(routes.calendar);
 			}
 			setIsLoading(false);
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, step]);
 
@@ -122,6 +115,7 @@ const Homepage = () => {
 					Icons8
 				</a>
 			</StyledIconsInfo>
+			{redirect && <Redirect to={redirect} />}
 		</StyledWrapper>
 	);
 };

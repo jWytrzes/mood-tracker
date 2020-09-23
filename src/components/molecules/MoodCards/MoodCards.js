@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../firebase';
 import { endpoints } from '../../../utils/constants';
-import MoodInput from '../../atoms/MoodInput/MoodInput';
+import MoodInput from '../../molecules/MoodInput/MoodInput';
 import { StyledWrapper } from './MoodCards-styles';
 
 const MoodCards = ({ values }) => {
