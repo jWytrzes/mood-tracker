@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Field } from 'formik';
 import { changeTheme } from '../../../utils/redux';
 import { storage } from '../../../firebase';
+import Loader from '../../atoms/Loader/Loader';
 import {
 	StyledLabel,
 	StyledImg,
@@ -11,6 +12,7 @@ import {
 } from './MoodInput-styles';
 
 const MoodInput = ({ icon, name, checked }) => {
+	const [isLoading, setIsLoading] = useState(true);
 	const [link, setLink] = useState('');
 	const dispatch = useDispatch();
 
@@ -40,8 +42,15 @@ const MoodInput = ({ icon, name, checked }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [checked]);
 
+	useEffect(() => {
+		if (link.length) {
+			setIsLoading(false);
+		}
+	}, [link]);
+
 	return (
 		<StyledLabel checked={checked}>
+			{isLoading && <Loader />}
 			<StyledImg src={link} alt="" />
 			<StyledRadio
 				as={Field}
