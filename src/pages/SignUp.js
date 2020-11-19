@@ -1,6 +1,6 @@
 import React from 'react';
 import H1 from '../components/atoms/H2';
-import SignUpForm from '../components/molecules/SignUpForm/SignUpForm';
+import SignUpForm from '../components/organisms/SignUpForm/SignUpForm';
 import LoginTemplate from '../templates/LoginTemplate/LoginTemplate';
 
 const Login = () => {

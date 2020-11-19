@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../firebase';
 import { endpoints } from '../../../utils/constants';
+import Loader from '../../atoms/Loader/Loader';
 import MoodInput from '../../molecules/MoodInput/MoodInput';
 import { StyledWrapper } from './MoodCards-styles';
 
 const MoodCards = ({ values }) => {
 	const [moods, setMoods] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		let isMounted = false;
@@ -19,6 +21,7 @@ const MoodCards = ({ values }) => {
 				);
 				if (!isMounted) {
 					setMoods(moodsArr);
+					setIsLoading(false);
 				}
 			});
 
@@ -29,6 +32,7 @@ const MoodCards = ({ values }) => {
 
 	return (
 		<StyledWrapper>
+			{isLoading && <Loader />}
 			{moods.map((mood) => {
 				return (
 					<MoodInput
