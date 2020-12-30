@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { userSelector, stateSelector } from '../utils/redux';
 import { routes, steps } from '../utils/constants';
 import { genereateRandomData } from '../utils';
+import { auth } from '../firebase';
 import CalendarHeader from '../components/molecules/CalendarHeader/CalendarHeader';
 import CalendarBox from '../components/organisms/CalendarBox/CalendarBox';
 import Button from '../components/atoms/Button/Button';
@@ -40,6 +41,17 @@ const StyledButtonsWrapper = styled.div`
 	}
 `;
 
+const StyledLogOut = styled.button`
+	border: none;
+	background: none;
+	font-size: 1.2rem;
+	color: ${({ theme }) => theme.textSecondary};
+	padding: 1rem;
+	max-width: 500px;
+	margin: 0 auto;
+	cursor: pointer;
+`;
+
 const CalendarPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [redirect, setRedirect] = useState(null);
@@ -47,8 +59,8 @@ const CalendarPage = () => {
 	const { step } = useSelector(stateSelector);
 
 	useEffect(() => {
-		user.moodData ? setIsLoading(false) : setIsLoading(true);
-	}, [user.moodData]);
+		user && user.moodData ? setIsLoading(false) : setIsLoading(true);
+	}, [user && user.moodData]);
 
 	useEffect(() => {
 		if (step) {
@@ -65,6 +77,10 @@ const CalendarPage = () => {
 		genereateRandomData();
 	};
 
+	const logOut = () => {
+		auth.signOut();
+	};
+
 	return (
 		<StyledWrapper>
 			{isLoading && <Loader />}
@@ -78,6 +94,7 @@ const CalendarPage = () => {
 					See stats
 				</Button>
 			</StyledButtonsWrapper>
+			<StyledLogOut onClick={logOut}>Log Out</StyledLogOut>
 			{redirect && <Redirect to={redirect} />}
 		</StyledWrapper>
 	);
